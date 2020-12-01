@@ -469,10 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cb15e63cf9fd04280d8f31c13dc3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points:
-  - {fileID: 1838567690}
-  - {fileID: 1123756250}
-  - {fileID: 923711120}
+  Points: []
   Treshold: 1
 --- !u!195 &863330230
 NavMeshAgent:

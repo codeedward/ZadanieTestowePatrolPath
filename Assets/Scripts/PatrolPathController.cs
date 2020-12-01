@@ -14,7 +14,14 @@ public class PatrolPathController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        UpdateTarget();
+        if(Points?.Count == 0)
+        {
+            EnablePathFinding(false);
+        }
+        else
+        {
+            UpdateTarget();
+        }
     }
 
     void Update()
@@ -29,6 +36,11 @@ public class PatrolPathController : MonoBehaviour
             currentPointIndex = 0;
         }
         return Points[currentPointIndex];
+    }
+
+    public void EnablePathFinding(bool flag)
+    {
+        enabled = flag;
     }
 
     void SetNextPoint(ref Transform point)
