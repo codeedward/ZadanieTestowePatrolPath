@@ -31,14 +31,15 @@ public class PatrolPathController : MonoBehaviour
         return Points[currentPointIndex];
     }
 
-    void SetNextPoint(Transform point)
+    void SetNextPoint(ref Transform point)
     {
         agent.destination = point.position;
     }
 
     void UpdateTarget()
     {
-        SetNextPoint(GetNextPoint());
+        var nextPoint = GetNextPoint();
+        SetNextPoint(ref nextPoint);
     }
 
     void CheckDestinationReached() 
@@ -46,7 +47,7 @@ public class PatrolPathController : MonoBehaviour
         float distanceToTarget = Vector3.Distance(transform.position, Points[currentPointIndex].position);
         if(distanceToTarget < Treshold)
         {
-            SetNextPoint(GetNextPoint());
+            UpdateTarget();
         }
     }
 }
