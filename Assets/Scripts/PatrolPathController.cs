@@ -1,0 +1,52 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class PatrolPathController : MonoBehaviour
+{
+    public List<Transform> Points;
+    public float Treshold;
+    private int currentPointIndex = -1;
+    private NavMeshAgent agent;
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
+        UpdateTarget();
+    }
+
+    void Update()
+    {
+        CheckDestinationReached();
+    }
+
+    public Transform GetNextPoint()
+    {
+        if(++currentPointIndex >= Points.Count)
+        {
+            currentPointIndex = 0;
+        }
+        return Points[currentPointIndex];
+    }
+
+    void SetNextPoint(Transform point)
+    {
+        agent.destination = point.position;
+    }
+
+    void UpdateTarget()
+    {
+        SetNextPoint(GetNextPoint());
+    }
+
+    void CheckDestinationReached() 
+    {
+        float distanceToTarget = Vector3.Distance(transform.position, Points[currentPointIndex].position);
+        if(distanceToTarget < Treshold)
+        {
+            SetNextPoint(GetNextPoint());
+        }
+    }
+}
